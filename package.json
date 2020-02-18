@@ -1,0 +1,11 @@
+{
+  "name": "databasequery",
+  "version": "1.0.0",
+  "description": "this module is used to promisfy mysql function and handle it return",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "alee0510",
+  "license": "ISC"
+}
