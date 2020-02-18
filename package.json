@@ -1,5 +1,5 @@
 {
-  "name": "databasequery",
+  "name": "query-module",
   "version": "1.0.0",
   "description": "this module is used to promisfy mysql function and handle it return",
   "main": "index.js",
