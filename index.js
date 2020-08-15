@@ -44,9 +44,9 @@ class PoolConnection {
         this._db = db
     }
 
-    dbPoolQuery = (query, escape = []) => {
+    dbPoolQuery = (connection, query, escape = []) => {
         return new Promise((resolve, reject) => {
-            this._db.query(query, escape, (err, result) => {
+            connection.query(query, escape, (err, result) => {
                 // check err
                 err ? reject({code : 500, msg : err.sqlMessage}) : resolve(result)
             })
@@ -58,7 +58,7 @@ class PoolConnection {
         catch (err) { res.status(err.code).send(err.msg) }
     }
 
-    dbPoolQueryTransaction = (res, callback) => {
+    dbPoolQueryTransactionWithErrorHandle = (res, callback) => {
         this._db.getConnection((err, connection) => {
             if (err) {
                 connection.rollback()

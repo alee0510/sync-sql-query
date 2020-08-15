@@ -67,19 +67,51 @@
 
         // used error handle
         db.dbQueryWithErrorHandle(res, async () => {
-            // define your query
+            // define and your query
             const query = 'SELECT * FROM users WHERE id ?'
             const result = await db.dbQuery(query, id)
 
             //...do something with your result
-
+            // or do more query inside this function
         })
 
     })
 
     // use begin transaction for single connection
+    app.use('/your-endpoint', (req, res) => {
+        //... do something
+
+        db.dbQueryTransactionWithErrorHandle(res, async () => {
+            // define and your query
+            const query = 'INSERT INTO users SET ?'
+            const result = await db.dbQuery(query, id)
+
+            const query2 = 'INSERY INTO profile SET ?'
+            const result2  =await db.dbQuery(query2, data)
+
+            //...do something with your result 
+            // or do more query inside this function
+            // if err occur, query will be rollback automatically
+        })
+    }
+
     // use begin transaction for pool connection
-    
+    app.use('/your-endpoint', (req, res) => {
+        //... do something
+
+        db.dbPoolQueryTransactionWithErrorHandle(res, async connection => {
+            // define and your query
+            const query = 'INSERT INTO users SET ?'
+            const result = await db.dbPoolQuery(connection, query, id)
+
+            const query2 = 'INSERY INTO profile SET ?'
+            const result2  =await db.dbPoolQuery(connection, query2, data)
+
+            //...do something with your result 
+            // or do more query inside this function
+            // if err occur, query will be rollback automatically
+        })
+    }
 ```
 
 creted by alee0510
