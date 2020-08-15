@@ -53,13 +53,33 @@
     const dbConnection = required('sync-sql-query')
 
     // for single connection
-    dbConnection.single([your-database-connection])
+    const db = dbConnection.single([your-database-connection])
 
     // for pool connection
-    dbConnection.pool()
-   
+    const db = dbConnection.pool([your-database-connection])
 ```
 
 ## How To Use ?
+```javascript
+    // do query in single or pool connection
+    app.use('/your-endpoint', (req, res) => {
+        //... do something
+
+        // used error handle
+        db.dbQueryWithErrorHandle(res, async () => {
+            // define your query
+            const query = 'SELECT * FROM users WHERE id ?'
+            const result = await db.dbQuery(query, id)
+
+            //...do something with your result
+
+        })
+
+    })
+
+    // use begin transaction for single connection
+    // use begin transaction for pool connection
+    
+```
 
 creted by alee0510
