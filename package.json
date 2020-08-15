@@ -1,6 +1,6 @@
 {
   "name": "sync-sql-query",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "this module is used to promisfy mysql function and handle it return",
   "main": "index.js",
   "scripts": {
