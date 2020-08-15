@@ -13,6 +13,12 @@ class SingleConnection {
         })
     }
 
+    // create custom function from error handling
+    dbQueryWithErrorHandle = async (res, callback) => {
+        try { await callback () }
+        catch (err) { res.status(err.code).send(err.msg) }
+    }
+
     // error handling for begin transaction 
     dbQueryTransactionWithErrorHandle = async (res, callback) => {
         await this._db.beginTransaction( err => {
@@ -34,17 +40,26 @@ class SingleConnection {
 }
 
 class PoolConnection {
-    dbPoolQuery = (connection, query, escape = []) => {
+    constructor(db) {
+        this._db = db
+    }
+
+    dbPoolQuery = (query, escape = []) => {
         return new Promise((resolve, reject) => {
-            connection.query(query, escape, (err, result) => {
+            this._db.query(query, escape, (err, result) => {
                 // check err
                 err ? reject({code : 500, msg : err.sqlMessage}) : resolve(result)
             })
         })
     }
 
-    dbPoolQueryTransaction = (dbConnection, res, callback) => {
-        dbConnection.getConnection((err, connection) => {
+    dbPoolQueryWithErrorHandle = async (res, callback) => {
+        try { await callback () }
+        catch (err) { res.status(err.code).send(err.msg) }
+    }
+
+    dbPoolQueryTransaction = (res, callback) => {
+        this._db.getConnection((err, connection) => {
             if (err) {
                 connection.rollback()
                 connection.release()
@@ -66,6 +81,6 @@ class PoolConnection {
 }
 
 module.exports = { 
-    connection : db => new SingleConnection(db), 
-    poolConnection : _ => new PoolConnection()
+    single : db => new SingleConnection(db), 
+    pool : db => new PoolConnection(db)
 }

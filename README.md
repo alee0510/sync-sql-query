@@ -49,7 +49,15 @@
 ```
 - setup my custom function along with your sql connection
 ``` javascript
+    // import module
+    const dbConnection = required('sync-sql-query')
+
     // for single connection
+    dbConnection.single([your-database-connection])
+
+    // for pool connection
+    dbConnection.pool()
+   
 ```
 
 ## How To Use ?
