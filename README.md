@@ -1,4 +1,4 @@
-# Custom Promisfy mysql.query() Function
+# Custom Promisfy mysql.query() Function 😎
 ![Twitter Follow](https://img.shields.io/twitter/follow/a_lee0510?style=social)![GitHub followers](https://img.shields.io/github/followers/alee0510?style=social)
 
 ## Purpose
@@ -12,9 +12,46 @@
 - this function is depend on [mysql](https://www.npmjs.com/package/mysql) library
 - ES5 syntax
 
-## Port in your project
+## Port in your project 🥤
 ```
-    npm  i https://github.com/alee0510/sync-sql-query
+    $ npm install https://github.com/alee0510/sync-sql-query
 ```
 
-## How to use ?
+## Setup Your Project ⚙
+- install [mysql](https://www.npmjs.com/package/mysql) package
+```
+    $ npm install mysql
+```
+
+- port my repo in your project
+- setup your mysql connection
+```javascript
+    // import mysql module
+    const mysql = require('mysql')
+
+    // create single connection
+    const connection = mysql.createConnection({
+        host : [database-host],
+        port : [database-port],
+        user : [insert-mysql-username],
+        password : [mysql-password],
+        database : [databse-name]
+    })
+
+    // or use pool connection
+    const pool = mysql.createPool({
+        connectionLimit : 10, // set your connection limit
+        port : [database-port],
+        user : [insert-mysql-username],
+        password : [mysql-password],
+        database : [databse-name]
+    })
+```
+- setup my custom function along with your sql connection
+``` javascript
+    // for single connection
+```
+
+## How To Use ?
+
+creted by alee0510
