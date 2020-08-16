@@ -73,7 +73,7 @@ class PoolConnection {
                 connection.release()
                 return
             }
-            connection.beginTransaction( async err => {
+            connection.beginTransaction( async (err) => {
                 try {
                     if (err) throw ({ code : 50, msg : err})
                     await callback(connection)
