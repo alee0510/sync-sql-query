@@ -1,14 +1,14 @@
 # Custom Promisfy mysql.query() Function 😎
 ![Twitter Follow](https://img.shields.io/twitter/follow/a_lee0510?style=social)![GitHub followers](https://img.shields.io/github/followers/alee0510?style=social)
 
-## Purpose
+## Purpose ✈
 - create promisfy for mysql.query()
 - use async and await to create sync like syntax
 - use function to handle error without repeatly type try...catch...
 - applied for begin transaction in nodejs
 - begin transaction for single and pool connection
 
-## Required
+## Required 💾
 - this function is depend on [mysql](https://www.npmjs.com/package/mysql) library
 - ES5 syntax
 
@@ -59,7 +59,7 @@
     const db = dbConnection.pool([your-database-connection])
 ```
 
-## How To Use ?
+## How To Use ? 🙋‍♂️
 ```javascript
     // do query in single
     app.use('/your-endpoint', (req, res) => {
@@ -130,4 +130,4 @@
     }
 ```
 
-created by alee0510
+created by alee0510 😎😎😎
