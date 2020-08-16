@@ -61,7 +61,7 @@
 
 ## How To Use ?
 ```javascript
-    // do query in single or pool connection
+    // do query in single
     app.use('/your-endpoint', (req, res) => {
         //... do something
 
@@ -70,6 +70,22 @@
             // define and your query
             const query = 'SELECT * FROM users WHERE id ?'
             const result = await db.dbQuery(query, id)
+
+            //...do something with your result
+            // or do more query inside this function
+        })
+
+    })
+
+    // do query in pool connection
+    app.use('/your-endpoint', (req, res) => {
+        //... do something
+
+        // used error handle
+        db.dbPoolQueryWithErrorHandle(res, async (connection) => {
+            // define and your query
+            const query = 'SELECT * FROM users WHERE id ?'
+            const result = await db.dbPoolQuery(connection, query, id)
 
             //...do something with your result
             // or do more query inside this function
