@@ -54,8 +54,16 @@ class PoolConnection {
     }
 
     dbPoolQueryWithErrorHandle = async (res, callback) => {
-        try { await callback () }
-        catch (err) { res.status(err.code).send(err.msg) }
+        this._db.getConnection((err, connection) => {
+            try {
+                if (err) throw ({ code : 500, msg : err})
+                await callback(connection)
+            } catch (err) {
+                res.status(err.code).send(err.msg)
+            } finally {
+                await connection.release()
+            }
+        })
     }
 
     dbPoolQueryTransactionWithErrorHandle = (res, callback) => {
@@ -67,6 +75,7 @@ class PoolConnection {
             }
             connection.beginTransaction( async err => {
                 try {
+                    if (err) throw ({ code : 50, msg : err})
                     await callback(connection)
                     await connection.commit()
                 } catch (err) {
