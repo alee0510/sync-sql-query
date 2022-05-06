@@ -103,7 +103,7 @@
             const result = await db.dbQuery(query, id)
 
             const query2 = 'INSERY INTO profile SET ?'
-            const result2  =await db.dbQuery(query2, data)
+            const result2 = await db.dbQuery(query2, data)
 
             //...do something with your result 
             // or do more query inside this function
